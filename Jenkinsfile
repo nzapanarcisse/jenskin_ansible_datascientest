@@ -48,7 +48,7 @@ pipeline {
                        ansible-playbook  -i hosts.yml --vault-password-file vault.key  --extra-vars "ansible_sudo_pass=$SUDOPASS" deploy.yml
                        '''
                    }
-               } 
+               }
             }
           }
       }
