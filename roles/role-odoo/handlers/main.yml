@@ -1,0 +1,6 @@
+---
+handlers:
+  - name: Restart Odoo
+    command: docker-compose up -d
+    args:
+      chdir: "{{ ansible_user }}/opt/jenkins-training/jenskin_odoo"

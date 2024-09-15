@@ -1,0 +1,34 @@
+version: '2'
+services:
+  db:
+    image: postgres:15
+    user: root
+    environment:
+      - POSTGRES_USER={{ POSTGRES_USER }}
+      - POSTGRES_PASSWORD={{ POSTGRES_PASSWORD }}
+      - POSTGRES_DB=POSTGRES_DB
+    restart: always             # run as a service
+    volumes:
+        - ./postgresql:/var/lib/postgresql/data
+
+  odoo16:
+    image: odoo:{{ ansible_hostname }}
+    user: root
+    depends_on:
+      - db
+    ports:
+      - "10016:8069"
+      - "20016:8072" # live chat
+    tty: true
+    command: --
+    environment:
+      - HOST=db
+      - USER={{ ODOO_USER }}
+      - PASSWORD={{ ODOO_PASSWORD }}
+    volumes:
+      #- /etc/timezone:/etc/timezone:ro
+      #- /etc/localtime:/etc/localtime:ro
+      # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
+    restart: always 

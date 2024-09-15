@@ -1,0 +1,8 @@
+---
+- hosts: "prod"
+  remote_user: {{ ansible_user }}
+  tasks:
+    - name: check website
+      uri:
+        url: http://192.168.99.12:{{ webapp_port }}
+        status_code: 200
