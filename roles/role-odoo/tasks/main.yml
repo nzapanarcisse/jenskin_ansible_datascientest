@@ -13,9 +13,9 @@
 - name: Stop and remove existing Odoo container
   command: docker-compose down
   args:
-    chdir: "{{ ansible_user }}/opt/jenkins-training/jenskin_odoo"
+    chdir: "{{ ansible_user }}/opt/jenkins-training/odoo16"
   when: odoo_container.stdout == project_name + '_odoo16'
 - name: Start Odoo container
   command: docker-compose up -d
   args:
-    chdir: "{{ ansible_user }}/opt/jenkins-training/jenskin_odoo"
+    chdir: "{{ ansible_user }}/opt/jenkins-training/odoo16"
