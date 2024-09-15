@@ -1,5 +1,5 @@
 ---
 file_template: docker-compose.yml.j2
 ansible_python_interpreter: /usr/bin/python3
-compose_file: /home/{{ ansible_user }}/opt/jenkins-training/jenskin_odoo/docker-compose.yml
-project_name: jenkins_odoo
+compose_file: /home/{{ ansible_user }}/opt/jenkins-training/odoo16/docker-compose.yml
+project_name: odoo16
