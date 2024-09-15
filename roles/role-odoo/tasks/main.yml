@@ -16,7 +16,7 @@
 - name: Copy docker-compose.yml
   template:
     src: docker-compose.yml.j2
-    dest: "{{ compose_file }}"
+    dest: "{{ compose_file | trim }}"
 - name: Check if Odoo container is running
   command: docker ps --filter "name={{ project_name }}_odoo16" --format "{{
     '{{.Names}}' }}"
