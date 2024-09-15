@@ -1,10 +1,22 @@
 ---
+- name: Check if docker-compose.yml exists
+  stat:
+    path: "{{ compose_file }}"
+  register: compose_file_stat
+- name: Stop and remove existing Odoo container if the file exists
+  command: docker-compose down
+  args:
+    chdir: "/opt/jenkins-training/odoo16"
+  when: compose_file_stat.stat.exists
+- name: Remove existing docker-compose.yml
+  file:
+    path: "{{ compose_file }}"
+    state: absent
+  when: compose_file_stat.stat.exists
 - name: Copy docker-compose.yml
   template:
     src: docker-compose.yml.j2
     dest: "{{ compose_file }}"
-  notify:
-    - Restart Odoo
 - name: Check if Odoo container is running
   command: docker ps --filter "name={{ project_name }}_odoo16" --format "{{
     '{{.Names}}' }}"
