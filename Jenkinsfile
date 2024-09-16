@@ -58,19 +58,13 @@ pipeline {
                    }
            }
      */
-      /*
-     post{
-        SUCCESS {
-            slackSend color: "good", message: "Narcisse => CONGRATULATION: Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful ! more info ${env.BUILD_URL}"
-          }
-        FAILURE {
-            slackSend color: "danger", message: "Narcisse => BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed ! more info ${env.BUILD_URL}"
-          }
-        UNSTABLE {
-            slackSend color: "warning", message: "Narcisse => BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was unstable ! more info ${env.BUILD_URL}"
-          }
-        DANGER {
-            slackSend color: "danger", message: "Narcisse => BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} its result was unclear ! more info ${env.BUILD_URL}"
-          }
-     }*/
+
+     post {
+            success {
+              slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://${PROD_APP_ENDPOINT} , STAGING URL => http://${STG_APP_ENDPOINT}")
+              }
+           failure {
+                 slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+               }
+         }
     }
