@@ -1,5 +1,5 @@
 /* import shared library */
-/*@Library('narcisse-shared-library') _*/
+/*@Library('narcisse-shared-library') _ */
 pipeline {
     agent none
     stages {
@@ -58,6 +58,7 @@ pipeline {
                    }
            }
      */
+      /*
      post{
         SUCCESS {
             slackSend color: "good", message: "Narcisse => CONGRATULATION: Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful ! more info ${env.BUILD_URL}"
@@ -71,5 +72,5 @@ pipeline {
         DANGER {
             slackSend color: "danger", message: "Narcisse => BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} its result was unclear ! more info ${env.BUILD_URL}"
           }
-     }
+     }*/
     }
