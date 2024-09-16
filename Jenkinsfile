@@ -1,5 +1,5 @@
 /* import shared library */
-@Library('narcisse-shared-library') _
+/*@Library('narcisse-shared-library') _*/
 pipeline {
     agent none
     stages {
@@ -50,10 +50,26 @@ pipeline {
             }
           }
       }
+      /*
       post {
         always{
            script{
                slackNotifier currentBuild.result}
                    }
            }
+     */
+     post{
+        SUCCESS {
+            slackSend color: "good", message: "Narcisse => CONGRATULATION: Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful ! more info ${env.BUILD_URL}"
+          }
+        FAILURE {
+            slackSend color: "danger", message: "Narcisse => BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed ! more info ${env.BUILD_URL}"
+          }
+        UNSTABLE {
+            slackSend color: "warning", message: "Narcisse => BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was unstable ! more info ${env.BUILD_URL}"
+          }
+        DANGER {
+            slackSend color: "danger", message: "Narcisse => BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} its result was unclear ! more info ${env.BUILD_URL}"
+          }
+     }
     }
