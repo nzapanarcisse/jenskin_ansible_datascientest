@@ -1,5 +1,5 @@
 /* import shared library */
-/* @Library('chocoapp-slack-share-library')_ */
+@Library('narcisse-shared-library')
 pipeline {
     agent none
     stages {
@@ -50,11 +50,10 @@ pipeline {
             }
           }
       }
-      /*   post {
-             always{
-                script{
-                slackNotifier currentBuild.result}
-             }
-          }
-      */
+      post {
+        always{
+           script{
+               slackNotifier currentBuild.result}
+                   }
+           }
     }
