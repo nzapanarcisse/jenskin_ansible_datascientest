@@ -1,5 +1,5 @@
 /* import shared library */
-@Library('narcisse-shared-library')
+@Library('narcisse-shared-library') _
 pipeline {
     agent none
     stages {
