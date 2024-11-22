@@ -2,7 +2,25 @@
 /*@Library('narcisse-shared-library') _ */
 pipeline {
     agent none
+    
     stages {
+        stage('Parallel Tasks') {
+            parallel {
+                stage('Task 1') {
+                    steps {
+                        echo 'Executing Task 1...'
+                        exit 1
+                        // Ajoutez ici les étapes pour la tâche 1
+                    }
+                }
+                stage('Task 2') {
+                    steps {
+                        echo 'Executing Task 2...'
+                        // Ajoutez ici les étapes pour la tâche 2
+                    }
+                }
+            }
+        }
         stage('Check yaml syntax') {
             agent { docker { image 'sdesbure/yamllint' } }
             steps {
