@@ -9,7 +9,7 @@ pipeline {
                 stage('Task 1') {
                     steps {
                         echo 'Executing Task 1...'
-                        exit 1
+                        
                         // Ajoutez ici les étapes pour la tâche 1
                     }
                 }
