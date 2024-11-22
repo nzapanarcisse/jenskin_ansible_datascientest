@@ -19,6 +19,13 @@ pipeline {
                         // Ajoutez ici les étapes pour la tâche 2
                     }
                 }
+                stage('Check yaml syntax') {
+                agent { docker { image 'sdesbure/yamllint' } }
+                    steps {
+                    sh 'yamllint --version'
+                    sh 'yamllint \${WORKSPACE}'
+                }
+        }
             }
         }
         stage('Check yaml syntax') {
