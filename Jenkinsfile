@@ -14,7 +14,6 @@ pipeline {
                         sh 'yamllint \${WORKSPACE}'
                     }
                     }
-                
                 stage('Check markdown syntax') {
                     agent { docker { image 'ruby:alpine' } }
                     steps {
