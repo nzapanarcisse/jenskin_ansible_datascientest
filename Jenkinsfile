@@ -64,7 +64,7 @@ pipeline {
                slackNotifier currentBuild.result}
                    }
            }*/ 
-
+/*
       post {
 
            failure {
@@ -73,6 +73,6 @@ pipeline {
            success {
                          slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://185 , STAGING URL => http://25")
            }
-         }
+         }*/ 
 
     }
