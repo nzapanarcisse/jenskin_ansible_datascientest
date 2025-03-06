@@ -63,8 +63,7 @@ pipeline {
            script{
                slackNotifier currentBuild.result}
                    }
-           }*/
-     
+           }*/ 
 
     /*  post {
 
