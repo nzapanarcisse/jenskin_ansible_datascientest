@@ -3,20 +3,25 @@
 pipeline {
     agent none
     stages {
-        stage('Check yaml syntax') {
-            agent { docker { image 'sdesbure/yamllint' } }
-            steps {
-                sh 'yamllint --version'
-                sh 'yamllint \${WORKSPACE}'
-            }
-        }
-        stage('Check markdown syntax') {
-            agent { docker { image 'ruby:alpine' } }
-            steps {
-                sh 'apk --no-cache add git'
-                sh 'gem install mdl'
-                sh 'mdl --version'
-                sh 'mdl --style all --warnings --git-recurse \${WORKSPACE}'
+        stage('Parallel Tasks') {
+            parallel {
+                
+                stage('Check yaml syntax') {
+                    agent { docker { image 'sdesbure/yamllint' } }
+                    steps {
+                        sh 'yamllint --version'
+                        sh 'yamllint \${WORKSPACE}'
+                    }
+                    }
+                stage('Check markdown syntax') {
+                    agent { docker { image 'ruby:alpine' } }
+                    steps {
+                        sh 'apk --no-cache add git'
+                        sh 'gem install mdl'
+                        sh 'mdl --version'
+                        sh 'mdl --style all --warnings --git-recurse \${WORKSPACE}'
+                    }
+                }
             }
         }
         stage('Prepare ansible environment') {
