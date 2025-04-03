@@ -1,31 +1,24 @@
-/*import shared library */
-/*@Library('narcisse-shared-library') _ */
+import shared library
+@Library('narcisse-shared-library') _
 pipeline {
     agent none
-    
     stages {
-        stage('Parallel Tasks') {
-            parallel {
-                
-                stage('Check yaml syntax') {
-                    agent { docker { image 'sdesbure/yamllint' } }
-                    steps {
-                        sh 'yamllint --version'
-                        sh 'yamllint \${WORKSPACE}'
-                    }
-                    }
-                stage('Check markdown syntax') {
-                    agent { docker { image 'ruby:alpine' } }
-                    steps {
-                        sh 'apk --no-cache add git'
-                        sh 'gem install mdl'
-                        sh 'mdl --version'
-                        sh 'mdl --style all --warnings --git-recurse \${WORKSPACE}'
-                    }
-                }
+        stage('Check yaml syntax') {
+            agent { docker { image 'sdesbure/yamllint' } }
+            steps {
+                sh 'yamllint --version'
+                sh 'yamllint \${WORKSPACE}'
             }
         }
-        
+        stage('Check markdown syntax') {
+            agent { docker { image 'ruby:alpine' } }
+            steps {
+                sh 'apk --no-cache add git'
+                sh 'gem install mdl'
+                sh 'mdl --version'
+                sh 'mdl --style all --warnings --git-recurse \${WORKSPACE}'
+            }
+        }
         stage('Prepare ansible environment') {
             agent any
             environment {
@@ -57,14 +50,23 @@ pipeline {
             }
           }
       }
- /* post {
+     
+      post {
         always{
            script{
                slackNotifier currentBuild.result}
                    }
            }
+     
 
-     }*/
+    /*  post {
 
+           failure {
+                 slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+           }
+           success {
+                         slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://185 , STAGING URL => http://25")
+           }
+         }*/
 
     }
