@@ -1,4 +1,4 @@
-import shared library 
+/*import shared library */
 @Library('narcisse-shared-library') _ 
 pipeline {
     agent none
@@ -68,4 +68,3 @@ pipeline {
 
 
     }
-
