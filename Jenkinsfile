@@ -24,6 +24,7 @@ pipeline {
                 }
             }
         }
+        
         stage('Prepare ansible environment') {
             agent any
             environment {
