@@ -1,6 +1,6 @@
 /*importation shared library*/
 /*@Library('narcisse-shared-library') _*/
-pipeline {
+pipeline { 
     agent none
     stages {
         stage('Parallel Tasks') {
