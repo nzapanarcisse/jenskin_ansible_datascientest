@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Test and deploy the application') {
             environment {
-                SUDOPASS = credentials('sudopass')
+              #  SUDOPASS = credentials('sudopass')
             }
             agent { docker { image 'registry.gitlab.com/robconnolly/docker-ansible:latest' } }
             stages {
