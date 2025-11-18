@@ -63,7 +63,7 @@ pipeline {
                slackNotifier currentBuild.result}
                    }
            } 
-     
+       }
      /*  post {
 
            failure {
