@@ -1,5 +1,5 @@
 /*importation shared library*/
-/*@Library('narcisse-shared-library') _*/
+@Library('narcisse-shared-library') _
 pipeline { 
     agent none
     stages {
@@ -57,15 +57,15 @@ pipeline {
           }
       }
 
-  /*    
+    
       post {
         always{
            script{
                slackNotifier currentBuild.result}
                    }
            } 
-       }*/
-        post {
+       }
+      /*    post {
 
            failure {
                  slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
@@ -73,6 +73,6 @@ pipeline {
            success {
                          slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://185 , STAGING URL => http://25")
            }
-         }
+         }*/
 }
 
