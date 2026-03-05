@@ -56,7 +56,7 @@ pipeline {
             }
           }
       }
-   post {
+  /* post {
 
            failure {
 
@@ -70,7 +70,7 @@ pipeline {
 
            }
 
-         }
+         }*/
         
 }
 
